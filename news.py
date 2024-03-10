@@ -14,7 +14,10 @@ from heapq import nlargest
 import psycopg2
 import json
 from flask_cors import CORS
-
+nltk.download('averaged_perceptron_tagger')
+nltk.download("stopwords")
+nltk.download("punkt")
+nltk.download('universal_tagset')
 
 app = Flask(__name__,)
 cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
