@@ -61,7 +61,7 @@ def calculate_reading_time(text, words_per_minute=200):
 
 # print(f"Estimated reading time: {estimated_time:.2f} minutes")
 conn = psycopg2.connect(
-host="localhost", database="postgres", user="postgres", password="Mahakal@9770")
+host="dpg-cnmq90qcn0vc738fh5v0-a", database="news_magazine", user=", news_magazine_user", password="kcbYdr8UYXTE8jIdK9cw0Sh1KEiR56BS", port="5432")
 cur=conn.cursor()
 
 def summarize_text(text, num_sentences):
@@ -440,4 +440,4 @@ def protected():
         return redirect(url_for('ADMIN'))   
 
 if __name__ == '__main__':
-    app.run(debug=True ,port = 8000)
+    app.run(debug=True)
