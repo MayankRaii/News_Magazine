@@ -63,8 +63,11 @@ def calculate_reading_time(text, words_per_minute=200):
 conn = psycopg2.connect(
 host="dpg-cnmq90qcn0vc738fh5v0-a", database="news_magazine", user="news_magazine_user", password="kcbYdr8UYXTE8jIdK9cw0Sh1KEiR56BS", port="5432")
 cur=conn.cursor()
+
+# Define SQL query to create the table
+create_table_query = """
 CREATE TABLE IF NOT EXISTS NEWS (
-   
+
     url TEXT,
     text TEXT,
     estimated_time FLOAT,
@@ -77,7 +80,13 @@ CREATE TABLE IF NOT EXISTS NEWS (
     count_stp_word INT,
     upos JSONB
 );
+"""
 
+# Execute the SQL query to create the table
+cur.execute(create_table_query)
+
+# Commit the transaction
+conn.commit()
 def summarize_text(text, num_sentences):
     # Tokenize the text into sentences
     sentences = sent_tokenize(text)
