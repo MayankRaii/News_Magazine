@@ -332,8 +332,8 @@ def portal():
                 # conn.commit()
 
 
-                cur.execute("insert into NEWS(url,text,estimated_time,title,genre,compound,publisher,count_word,count_sent,count_stp_word,upos) values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",(url,  text,estimated_time,title,genre, compound,publisher,count_word, count_sent,count_stp_word, json.dumps(dict1)))
-                conn.commit()
+                # cur.execute("insert into NEWS(url,text,estimated_time,title,genre,compound,publisher,count_word,count_sent,count_stp_word,upos) values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",(url,  text,estimated_time,title,genre, compound,publisher,count_word, count_sent,count_stp_word, json.dumps(dict1)))
+                # conn.commit()
                 
             else:
                 return abort(406)
