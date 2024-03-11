@@ -63,6 +63,20 @@ def calculate_reading_time(text, words_per_minute=200):
 conn = psycopg2.connect(
 host="dpg-cnmq90qcn0vc738fh5v0-a", database="news_magazine", user="news_magazine_user", password="kcbYdr8UYXTE8jIdK9cw0Sh1KEiR56BS", port="5432")
 cur=conn.cursor()
+CREATE TABLE IF NOT EXISTS NEWS (
+   
+    url TEXT,
+    text TEXT,
+    estimated_time FLOAT,
+    title TEXT,
+    genre TEXT,
+    compound FLOAT,
+    publisher TEXT,
+    count_word INT,
+    count_sent INT,
+    count_stp_word INT,
+    upos JSONB
+);
 
 def summarize_text(text, num_sentences):
     # Tokenize the text into sentences
@@ -332,8 +346,8 @@ def portal():
                 # conn.commit()
 
 
-                # cur.execute("insert into NEWS(url,text,estimated_time,title,genre,compound,publisher,count_word,count_sent,count_stp_word,upos) values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",(url,  text,estimated_time,title,genre, compound,publisher,count_word, count_sent,count_stp_word, json.dumps(dict1)))
-                # conn.commit()
+                cur.execute("insert into NEWS(url,text,estimated_time,title,genre,compound,publisher,count_word,count_sent,count_stp_word,upos) values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",(url,  text,estimated_time,title,genre, compound,publisher,count_word, count_sent,count_stp_word, json.dumps(dict1)))
+                conn.commit()
                 
             else:
                 return abort(406)
