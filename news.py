@@ -357,10 +357,10 @@ def view_history():
 
 
 
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    return render_template('signup.html')
-users = [] #n@gmail.com 
+# @app.route('/login', methods=['GET', 'POST'])
+# def login():
+#     return render_template('signup.html')
+# users = [] #n@gmail.com 
 
 # @app.route('/submit', methods=['GET', 'POST'])
 # def submit():
@@ -372,45 +372,48 @@ users = [] #n@gmail.com
     #select * from datatable where name == user[-1][0] and password == users[-1][1]
     # pass 
 
-@app.route('/sign_page', methods=['GET', 'POST'])
-def signin():
-    return render_template('signin.html')
+# @app.route('/sign_page', methods=['GET', 'POST'])
+# def signin():
+#     return render_template('signin.html')
 
-@app.route('/signup', methods=['POST'])
-def signup():
-    data = request.get_json()
-    username = data.get('username')
-    password = data.get('password')
-    conn = psycopg2.connect(
-        host="localhost", database="postgres", user="postgres", password="Mahakal@9770")
-    cur = conn.cursor()
-    cur.execute("insert into login_details( email_id, password) values(%s,%s)", (username, password))
-    conn.commit()
-    return jsonify({"message": "Signup successful"}), 200
+# @app.route('/signup', methods=['POST'])
+# def signup():
+#     data = request.get_json()
+#     username = data.get('username')
+#     password = data.get('password')
+#     conn = psycopg2.connect(
+#         host="localhost", database="postgres", user="postgres", password="Mahakal@9770")
+#     cur = conn.cursor()
+#     cur.execute("insert into login_details( email_id, password) values(%s,%s)", (username, password))
+#     conn.commit()
+#     return jsonify({"message": "Signup successful"}), 200
 
-users = []
-@app.route('/signin', methods=['POST'])
-def signin2():
-    data = request.get_json()
-    username = data.get('email')
-    password = data.get('password')
-    conn = psycopg2.connect(
-        host="localhost", database="postgres", user="postgres", password="Mahakal@9770")
-    cur = conn.cursor()
-    cur.execute("SELECT * FROM login_details WHERE email_id = %s AND password = %s", (username, password))
-    row = cur.fetchone() 
-    conn.close()
-    if row: 
-        users.append([username,password])
-        print(users)
-        return jsonify({"authenticated": True}), 200
-    else:
-        return jsonify({"authenticated": False}), 401
+# users = []
+# @app.route('/signin', methods=['POST'])
+# def signin2():
+#     data = request.get_json()
+#     username = data.get('email')
+#     password = data.get('password')
+#     conn = psycopg2.connect(
+#         host="localhost", database="postgres", user="postgres", password="Mahakal@9770")
+#     cur = conn.cursor()
+#     cur.execute("SELECT * FROM login_details WHERE email_id = %s AND password = %s", (username, password))
+#     row = cur.fetchone() 
+#     conn.close()
+#     if row: 
+#         users.append([username,password])
+#         print(users)
+#         return jsonify({"authenticated": True}), 200
+#     else:
+#         return jsonify({"authenticated": False}), 401
  
 @app.route('/view11',methods = ('POST','GET'))
 def portal1():
+    # conn = psycopg2.connect(
+    # host="localhost", database="postgres", user="postgres", password="Mahakal@9770")
+    # cur=conn.cursor()
     conn = psycopg2.connect(
-    host="localhost", database="postgres", user="postgres", password="Mahakal@9770")
+    host="dpg-cnmq90qcn0vc738fh5v0-a", database="news_magazine", user="news_magazine_user", password="kcbYdr8UYXTE8jIdK9cw0Sh1KEiR56BS", port="5432")
     cur=conn.cursor()
     if request.method == 'POST':
         cur.execute('select * from NEWS')
