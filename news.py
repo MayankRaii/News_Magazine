@@ -27,29 +27,29 @@ from authlib.integrations.flask_client import OAuth
 from google_auth_oauthlib.flow import Flow
 
 
-oauth = OAuth(app)
-app.config['SECRET_KEY'] = "THIS SHOULD BE SECRET"
-app.config['GOOGLE_CLIENT_ID'] ="297539172644-va6g820g8f8bfjmuef456k4csmiakf0o.apps.googleusercontent.com"
-app.config['GOOGLE_CLIENT_SECRET'] = "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"
+# oauth = OAuth(app)
+# app.config['SECRET_KEY'] = "THIS SHOULD BE SECRET"
+# app.config['GOOGLE_CLIENT_ID'] ="297539172644-va6g820g8f8bfjmuef456k4csmiakf0o.apps.googleusercontent.com"
+# app.config['GOOGLE_CLIENT_SECRET'] = "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"
 
-google = oauth.register(
-    name = 'google',
-    client_id = app.config["GOOGLE_CLIENT_ID"],
-    client_secret = app.config["GOOGLE_CLIENT_SECRET"],
-    access_token_url = 'https://accounts.google.com/o/oauth2/token',
-    access_token_params = None,
-    authorize_url = 'https://accounts.google.com/o/oauth2/auth',
-    authorize_params = None,
-    api_base_url = 'https://www.googleapis.com/oauth2/v1/',
-    userinfo_endpoint = 'https://openidconnect.googleapis.com/v1/userinfo',  # This is only needed if using openId to fetch user info
-    client_kwargs = {'scope': 'openid email profile'},
-)
-client_secrets_file = 'app.json'
-scopes = ['https://www.googleapis.com/auth/userinfo.profile',
-          'https://www.googleapis.com/auth/userinfo.email',
-          'openid']
-redirect_uri = 'http://127.0.0.1:8000/callback'
-flow = Flow.from_client_secrets_file(client_secrets_file, scopes=scopes, redirect_uri=redirect_uri)
+# google = oauth.register(
+#     name = 'google',
+#     client_id = app.config["GOOGLE_CLIENT_ID"],
+#     client_secret = app.config["GOOGLE_CLIENT_SECRET"],
+#     access_token_url = 'https://accounts.google.com/o/oauth2/token',
+#     access_token_params = None,
+#     authorize_url = 'https://accounts.google.com/o/oauth2/auth',
+#     authorize_params = None,
+#     api_base_url = 'https://www.googleapis.com/oauth2/v1/',
+#     userinfo_endpoint = 'https://openidconnect.googleapis.com/v1/userinfo',  # This is only needed if using openId to fetch user info
+#     client_kwargs = {'scope': 'openid email profile'},
+# )
+# client_secrets_file = 'app.json'
+# scopes = ['https://www.googleapis.com/auth/userinfo.profile',
+#           'https://www.googleapis.com/auth/userinfo.email',
+#           'openid']
+# redirect_uri = 'http://127.0.0.1:8000/callback'
+# flow = Flow.from_client_secrets_file(client_secrets_file, scopes=scopes, redirect_uri=redirect_uri)
 def calculate_reading_time(text, words_per_minute=200):
     words = re.findall(r'\w+', text)
     word_count = len(words)
@@ -349,11 +349,12 @@ def portal():
     # msg_neg = neg,msg_pos=pos,msg_neu=neu,
     return render_template("index.html",msg_time = estimated_time, msg_title = title, msg_url = url, msg_genre = genre, msg_summary = summary,msg_summ_time = estimated_summ_time, msg_text = text,msg_count_word = count_word,msg_count_sent = count_sent, msg_count_stp_word = count_stp_word,msg_dict1 = dict1,msg_compound=compound,msg_results= publisher)
 
-@app.route('/view_history')
-def view_history():
-    #select ( summary, nowords, nosentence, nostop, nopos) from Data where name == users[-1][0] 
-    is_admin = False
-    return render_template('view_history.html', is_admin=is_admin)
+
+# @app.route('/view_history')
+# def view_history():
+#     #select ( summary, nowords, nosentence, nostop, nopos) from Data where name == users[-1][0] 
+#     is_admin = False
+#     return render_template('view_history.html', is_admin=is_admin)
 
 
 
@@ -406,48 +407,54 @@ def view_history():
 #         return jsonify({"authenticated": True}), 200
 #     else:
 #         return jsonify({"authenticated": False}), 401
- 
-@app.route('/view11',methods = ('POST','GET'))
-def portal1():
-    # conn = psycopg2.connect(
-    # host="localhost", database="postgres", user="postgres", password="Mahakal@9770")
-    # cur=conn.cursor()
-    conn = psycopg2.connect(
-    host="dpg-cnmq90qcn0vc738fh5v0-a", database="news_magazine", user="news_magazine_user", password="kcbYdr8UYXTE8jIdK9cw0Sh1KEiR56BS", port="5432")
-    cur=conn.cursor()
-    if request.method == 'POST':
-        cur.execute('select * from NEWS')
-        data=cur.fetchall()
-        conn.commit()
+
+
+
+
+# @app.route('/view11',methods = ('POST','GET'))
+# def portal1():
+#     # conn = psycopg2.connect(
+#     # host="localhost", database="postgres", user="postgres", password="Mahakal@9770")
+#     # cur=conn.cursor()
+#     conn = psycopg2.connect(
+#     host="dpg-cnmq90qcn0vc738fh5v0-a", database="news_magazine", user="news_magazine_user", password="kcbYdr8UYXTE8jIdK9cw0Sh1KEiR56BS", port="5432")
+#     cur=conn.cursor()
+#     if request.method == 'POST':
+#         cur.execute('select * from NEWS')
+#         data=cur.fetchall()
+#         conn.commit()
     
 
-    # Render HTML template with data
-    return render_template('admin_data.html', msg_data = data)
+#     # Render HTML template with data
+#     return render_template('admin_data.html', msg_data = data)
 
-@app.route('/ADMIN',methods = ('POST','GET'))
-def portalSA():
-    return render_template('admin_data.html')
+# @app.route('/ADMIN',methods = ('POST','GET'))
+# def portalSA():
+#     return render_template('admin_data.html')
+
+
+
 
 # login using google authentication  
-@app.route('/index',methods=['POST','GET'])
-def index():
-    if 'google_token' in session:
-        return redirect(url_for('protected'))
-    else:
-        authorization_url, _ = flow.authorization_url(prompt='consent')
-        return redirect(authorization_url)
-@app.route('/callback')
-def callback():
-    flow.fetch_token(code=request.args.get('code'))
-    session['google_token'] = flow.credentials.token
-    return redirect(url_for('protected'))
+# @app.route('/index',methods=['POST','GET'])
+# def index():
+#     if 'google_token' in session:
+#         return redirect(url_for('protected'))
+#     else:
+#         authorization_url, _ = flow.authorization_url(prompt='consent')
+#         return redirect(authorization_url)
+# @app.route('/callback')
+# def callback():
+#     flow.fetch_token(code=request.args.get('code'))
+#     session['google_token'] = flow.credentials.token
+#     return redirect(url_for('protected'))
 
-@app.route('/protected')
-def protected():
-    if 'google_token' in session:
-        return render_template("index.html") 
-    else:
-        return redirect(url_for('ADMIN'))   
+# @app.route('/protected')
+# def protected():
+#     if 'google_token' in session:
+#         return render_template("index.html") 
+#     else:
+#         return redirect(url_for('ADMIN'))   
 
 if __name__ == '__main__':
     app.run(debug=True)
