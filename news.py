@@ -227,10 +227,10 @@ def sentiment(text):
 def portal():
     url = ""
     text = ""
-    neg = 0
-    pos = 0
-    neu = 0
-    compound=0
+    # neg = 0
+    # pos = 0
+    # neu = 0
+    compound=""
     words_per_minute=200
     dict1 = {}
     estimated_time = 0
