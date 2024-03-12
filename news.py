@@ -438,7 +438,7 @@ def portalSA():
 
 email_id='' 
 
-redirect_uri = 'http://127.0.0.1:8000/callback'
+redirect_uri = 'https://news-magazine-t0qx.onrender.com/callback'
 
 # Create the OAuth flow object
 flow = Flow.from_client_secrets_file(client_secrets_file, scopes=scopes, redirect_uri=redirect_uri)
