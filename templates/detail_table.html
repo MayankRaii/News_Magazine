@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin_view</title>
+</head>
+<style>
+    table,caption,tr,td,th{
+        border:2px solid black;
+        border-collapse: collapse;
+        text-align: center;
+    background-color: rgb(253, 164, 217);
+    }
+    caption{
+        font-size: 35px;
+        font-weight: 800;
+        background-color: rgb(255, 215, 140);
+
+
+    }
+    th {
+        font-size: 22px;
+        font-weight: 600;
+        background-color: rgb(203, 155, 249);
+    }
+    .text11{
+        width : 100px;
+    }
+    .text12{
+        width : 400px;
+    }
+  
+</style>
+<body>
+    <table>
+        
+        <caption>All users history</caption>
+
+        <thead>
+        <tr>
+            <th class = "text11">URL</th>
+            <th class = "text12">ARTICLES</th>
+            <th class = text>Read Time</th>
+            <th class = text>Title</th>
+            <th class = text1>Genre</th>
+            <th class = text1>Sentiment</th>
+            <th class = text1>published Date & Time</th>
+            <th class = text1>NO. OF WORDS</th>
+            <th class = text2>NO. OF SENTENCES</th>
+            <th class = text3>NO. OF STOP WORDS</th>
+            <th class = text4>UPOS</th>
+        </tr></thead>
+        <tbody>
+            {% for row in data_html %}
+            <tr>
+                <td>{{ row[1] }}</td>
+                <td>{{ row[2] }}</td>
+                <td>{{ row[3] }}</td>
+                <td>{{ row[4] }}</td>
+                <td>{{ row[5] }}</td>
+                <td>{{ row[6] }}</td>
+                <td>{{ row[7] }}</td>
+                <td>{{ row[8] }}</td>
+                <td>{{ row[9] }}</td>
+                <td>{{ row[10] }}</td>
+                <td>{{ row[11] }}</td>
+
+                
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+</body>
+</html>
