@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for,jsonify,abort
 import nltk
 nltk.download("all")
-from urllib import requests
+# from urllib import requests
 
 from bs4 import BeautifulSoup
 # from urllib import requests
@@ -316,9 +316,8 @@ def paswrd_input():
     
 @app.route('/user_history',methods=('POST','GET'))
 def user_details():
-    conn = psycopg2.connect(host = "localhost", database = "dhp2024", user = "postgres", password = "Saurabh@1")
+    conn = psycopg2.connect(host = "dpg-cnmq90qcn0vc738fh5v0-a", database = "news_magazine", user = "news_magazine_user", password = "kcbYdr8UYXTE8jIdK9cw0Sh1KEiR56BS")
     cur = conn.cursor()
-    
     
     cur.execute("select * from NEWS")
     data = cur.fetchall()
