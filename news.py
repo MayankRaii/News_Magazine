@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for,jsonify,abort
 import nltk
-# nltk.download("all")
+nltk.download("all")
 # from urllib import requests
 import requests
 from bs4 import BeautifulSoup
