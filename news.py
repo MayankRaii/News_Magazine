@@ -219,20 +219,7 @@ def sentiment(text):
         return "Neutral" 
 
 
-# @app.route('/view',methods = ('POST','GET'))
-# def portal1():
-#     conn = psycopg2.connect(
-#     host="localhost", database="dhp2024", user="postgres", password="Mahakal@9770")
-#     cur=conn.cursor()
-#     if request.method == 'POST':
-#         cur.execute('select * from Summary')
-#         data=cur.fetchall()
-#         conn.commit()
-#     # cur.close()
-#     # conn.close()
 
-#     # Render HTML template with data
-#     return render_template('nltk1.html', msg_data = data)
 
 @app.route("/",methods = ('POST','GET'))
 def portal():
@@ -288,12 +275,7 @@ def portal():
                 publisher = a.get_text()
                 ###
 
-                # words = re.findall(r'\w+', text)
-                # word_count = len(words)
-                # reading_time_minutes = float(word_count / words_per_minute)
-                # return reading_time_minutes
-                # estimated_time = calculate_reading_time(text)
-                    
+                                    
                 time_1 =  calculate_reading_time(text)
                 time_2 =  calculate_reading_time(summary)
                 estimated_time = f"{time_1:.2f}"
@@ -342,12 +324,7 @@ def portal():
                 dict1["CONJ"] = count_conj
 
 
-                # conn = psycopg2.connect(
-                # host="localhost", database="postgres", user="postgres", password="Mahakal@9770")
-                # cur=conn.cursor()
-                # print(users)
-                # cur.execute("insert into Data( summary , nowords , nosentence , nostop , nopos , name , password) values(%s,%s,%s,%s,%s,%s,%s)",(summary,count_word,count_sent,count_stp_word,json.dumps(dict1),users[-1][0],users[-1][1]))
-                # conn.commit()
+            
 
 
                 cur.execute("insert into NEWS(url,text,estimated_time,title,genre,compound,publisher,count_word,count_sent,count_stp_word,upos) values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",(url,  text,estimated_time,title,genre, compound,publisher,count_word, count_sent,count_stp_word, json.dumps(dict1)))
@@ -420,9 +397,6 @@ def signin2():
  
 @app.route('/view11',methods = ('POST','GET'))
 def portal1():
-    conn = psycopg2.connect(
-    host="localhost", database="postgres", user="postgres", password="Mahakal@9770")
-    cur=conn.cursor()
     if request.method == 'POST':
         if email_id == "su-23019@sitare.org" or email_id == "kushal@sitare.org":
             cur.execute('select * from NEWS')
