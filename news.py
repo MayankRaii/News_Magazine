@@ -162,16 +162,16 @@ CREATE TABLE IF NOT EXISTS NEWS (
     id SERIAL PRIMARY KEY,
     url VARCHAR(255),
     text TEXT,
-    estimated_time INTEGER,
+    estimated_time FLOAT,
     title VARCHAR(255),
     genre VARCHAR(50),
-    compound FLOAT,
+    compound VARCHAR(100),
     publisher VARCHAR(100),
     count_word INTEGER,
     count_sent INTEGER,
     count_stp_word INTEGER,
     upos JSONB
-);
+)
 """
 
 # Execute the SQL query
