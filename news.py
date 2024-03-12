@@ -159,7 +159,6 @@ cur = conn.cursor()
 
 create_table_query = """
 CREATE TABLE IF NOT EXISTS NEWS (
-    id SERIAL PRIMARY KEY,
     url VARCHAR(255),
     text TEXT,
     estimated_time FLOAT,
