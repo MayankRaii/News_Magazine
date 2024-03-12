@@ -1,8 +1,8 @@
 from flask import Flask, render_template, request, redirect, url_for,jsonify,abort
 import nltk
 nltk.download("all")
-# from urllib import requests
-import requests
+from urllib import requests
+
 from bs4 import BeautifulSoup
 # from urllib import requests
 from nltk import word_tokenize
@@ -12,6 +12,7 @@ from nltk.sentiment.vader import SentimentIntensityAnalyzer
 from heapq import nlargest
 import psycopg2
 import json
+import requests
 
 
 app = Flask(__name__)
