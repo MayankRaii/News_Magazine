@@ -63,21 +63,7 @@ def calculate_reading_time(text, words_per_minute=200):
 conn = psycopg2.connect(
 host="dpg-cnmq90qcn0vc738fh5v0-a", database="news_magazine", user="news_magazine_user", password="kcbYdr8UYXTE8jIdK9cw0Sh1KEiR56BS", port="5432")
 cur=conn.cursor()
-cur.execute('''
-CREATE TABLE IF NOT EXISTS NEWS (
-    url TEXT,
-    text TEXT,
-    estimated_time TEXT,
-    title TEXT,
-    genre TEXT,
-    compound FLOAT,
-    publisher TEXT,
-    count_word INT,
-    count_sent INT,
-    count_stp_word INT,
-    upos JSON
-)
-''')
+cur.execute("CREATE TABLE IF NOT EXISTS NEWS (url TEXT,text TEXT,estimated_time TEXT,title TEXT,genre TEXT,compound FLOAT,publisher TEXT,count_word INT,count_sent INT,count_stp_word INT,upos JSON)")
 
 # Commit the transaction
 conn.commit()
@@ -213,12 +199,12 @@ def sentiment(text):
     # print("Mean Neutral Sentiment:", mean_neu,"%")
     # print("Mean Compound Sentiment:", mean_compound)
     # mean_neg,mean_pos,mean_neu,
-    if mean_compound > 0.5:
+    if mean_compound >= 0.5:
         return "Positive"
-    elif -0.5< mean_compound <0.5:
-        return "Negative"
+    elif mean_compound >= - 0.5 and mean_compound<0.5:
+        return "Neautral"
     else:
-        return "Neutral" 
+        return "Negative" 
 
 
 # @app.route('/view',methods = ('POST','GET'))
