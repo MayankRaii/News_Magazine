@@ -251,101 +251,101 @@ def portal():
     genre = ""
     if request.method == 'POST':
         url=request.form["enter_url"] 
-        try:   
-            if "timesofindia" in url:
-                page = requests.get(url)
-                soup = BeautifulSoup(page.content, "html.parser")
-                results = soup.find(class_="xf8Pm byline")
+    # try:   
+    #     if "timesofindia" in url:
+        page = requests.get(url)
+        soup = BeautifulSoup(page.content, "html.parser")
+        results = soup.find(class_="xf8Pm byline")
+    
+        
+        title = soup.title.get_text()
+        main_text= soup.find(class_="_s30J clearfix")
+        
+        text = main_text.get_text()
+
+        summary = summarize_text(text, 3)
+        compound = sentiment(text) 
+        ###
+
+
+
+        # html = request.urlopen(url).read().decode('utf8')
+
+        # soup = BeautifulSoup(html, 'html.parser')
+        
+        a = results.find('span')
+        publisher = a.get_text()
+        ###
+
+        # words = re.findall(r'\w+', text)
+        # word_count = len(words)
+        # reading_time_minutes = float(word_count / words_per_minute)
+        # return reading_time_minutes
+        # estimated_time = calculate_reading_time(text)
             
-                
-                title = soup.title.get_text()
-                main_text= soup.find(class_="_s30J clearfix")
-                
-                text = main_text.get_text()
+        time_1 =  calculate_reading_time(text)
+        time_2 =  calculate_reading_time(summary)
+        estimated_time = f"{time_1:.2f}"
+        estimated_summ_time = f"{time_2:.2f}"
 
-                summary = summarize_text(text, 3)
-                compound = sentiment(text) 
-                ###
+        genre = fun_genre(text)
 
+        word_list = word_tokenize(text)
 
 
-                # html = request.urlopen(url).read().decode('utf8')
+        pun_list = [".",",","?"]
 
-                # soup = BeautifulSoup(html, 'html.parser')
-                
-                a = results.find('span')
-                publisher = a.get_text()
-                ###
+        for i in word_list:
+            if i not in pun_list:
+                count_word+=1
 
-                # words = re.findall(r'\w+', text)
-                # word_count = len(words)
-                # reading_time_minutes = float(word_count / words_per_minute)
-                # return reading_time_minutes
-                # estimated_time = calculate_reading_time(text)
-                    
-                time_1 =  calculate_reading_time(text)
-                time_2 =  calculate_reading_time(summary)
-                estimated_time = f"{time_1:.2f}"
-                estimated_summ_time = f"{time_2:.2f}"
+        sent_list = sent_tokenize(text)
+        count_sent = len(sent_list)
 
-                genre = fun_genre(text)
+        stp_word = nltk.corpus.stopwords.words('english')
+        
+        for i in word_list:
+            if i in stp_word:
+                count_stp_word +=1
+        # pos_lst1 = ["NOUN","PRON","VERB"]
+        pos_lst2 = nltk.pos_tag(word_list,tagset="universal")
+        for i in pos_lst2:
+            if i[1] == "NOUN":
+                count_noun += 1
+            elif i[1] == "PRON": 
+                count_pron += 1
+            elif i[1] == "VERB":
+                count_verb += 1 
+            elif i[1] == "ADJ":
+                count_adj += 1
+            elif i[1] == "ADV":
+                count_adv +=1
+            elif i[1] == "CONJ":
+                count_conj += 1
 
-                word_list = word_tokenize(text)
-
-
-                pun_list = [".",",","?"]
-
-                for i in word_list:
-                    if i not in pun_list:
-                        count_word+=1
-
-                sent_list = sent_tokenize(text)
-                count_sent = len(sent_list)
-
-                stp_word = nltk.corpus.stopwords.words('english')
-                
-                for i in word_list:
-                    if i in stp_word:
-                        count_stp_word +=1
-                # pos_lst1 = ["NOUN","PRON","VERB"]
-                pos_lst2 = nltk.pos_tag(word_list,tagset="universal")
-                for i in pos_lst2:
-                    if i[1] == "NOUN":
-                        count_noun += 1
-                    elif i[1] == "PRON": 
-                        count_pron += 1
-                    elif i[1] == "VERB":
-                        count_verb += 1 
-                    elif i[1] == "ADJ":
-                        count_adj += 1
-                    elif i[1] == "ADV":
-                        count_adv +=1
-                    elif i[1] == "CONJ":
-                        count_conj += 1
-
-                dict1["NOUN"] = count_noun
-                dict1["PRON"] = count_pron
-                dict1["VERB"] = count_verb
-                dict1["ADV"] = count_adj
-                dict1["ADJ"] = count_adv
-                dict1["CONJ"] = count_conj
+        dict1["NOUN"] = count_noun
+        dict1["PRON"] = count_pron
+        dict1["VERB"] = count_verb
+        dict1["ADV"] = count_adj
+        dict1["ADJ"] = count_adv
+        dict1["CONJ"] = count_conj
 
 
-                # conn = psycopg2.connect(
-                # host="localhost", database="postgres", user="postgres", password="Mahakal@9770")
-                # cur=conn.cursor()
-                # print(users)
-                # cur.execute("insert into Data( summary , nowords , nosentence , nostop , nopos , name , password) values(%s,%s,%s,%s,%s,%s,%s)",(summary,count_word,count_sent,count_stp_word,json.dumps(dict1),users[-1][0],users[-1][1]))
-                # conn.commit()
+        # conn = psycopg2.connect(
+        # host="localhost", database="postgres", user="postgres", password="Mahakal@9770")
+        # cur=conn.cursor()
+        # print(users)
+        # cur.execute("insert into Data( summary , nowords , nosentence , nostop , nopos , name , password) values(%s,%s,%s,%s,%s,%s,%s)",(summary,count_word,count_sent,count_stp_word,json.dumps(dict1),users[-1][0],users[-1][1]))
+        # conn.commit()
 
 
-                cur.execute("insert into NEWS(url,text,estimated_time,title,genre,compound,publisher,count_word,count_sent,count_stp_word,upos) values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",(url,  text,estimated_time,title,genre, compound,publisher,count_word, count_sent,count_stp_word, json.dumps(dict1)))
-                conn.commit()
-                
-            else:
-                return abort(406)
-        except:
-            return abort(406)
+        cur.execute("insert into NEWS(url,text,estimated_time,title,genre,compound,publisher,count_word,count_sent,count_stp_word,upos) values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",(url,  text,estimated_time,title,genre, compound,publisher,count_word, count_sent,count_stp_word, json.dumps(dict1)))
+        conn.commit()
+            
+    #     else:
+    #         return abort(406)
+    # except:
+    #     return abort(406)
     # msg_neg = neg,msg_pos=pos,msg_neu=neu,
     return render_template("index.html",msg_time = estimated_time, msg_title = title, msg_url = url, msg_genre = genre, msg_summary = summary,msg_summ_time = estimated_summ_time, msg_text = text,msg_count_word = count_word,msg_count_sent = count_sent, msg_count_stp_word = count_stp_word,msg_dict1 = dict1,msg_compound=compound,msg_results= publisher)
 
