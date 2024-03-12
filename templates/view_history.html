@@ -1,0 +1,15 @@
+<script>
+  var isAdmin = {{ is_admin|tojson }};
+  if (isAdmin) {
+    // alert("If you are admin, you should go to admin login.");
+    alert("Only Admin can see the view history. If you are admin please click the Admin login button"); // Add your non-admin message here
+    window.location.href = "/"; // Redirect to main page
+  } else {
+    // alert("Your history will be displayed here.");
+    alert("Only Admin can see the view history. If you are admin please click the Admin login button"); // Add your non-admin message here
+     // Add your non-admin message here
+     window.setTimeout(function() {
+      window.location.href = "/"; // Redirect after 3 seconds
+    }, 1000); // 3000 milliseconds = 3 seconds
+  }
+</script>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>News Magazine</title>
+  <link rel="stylesheet" href="../static/style.css">
+  
+  <script src = "../static/index.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-circle-progress/1.2.2/circle-progress.min.js"></script>
+</head>
+
+<body>
+  <nav class = "navbar">
+    <div class="main-nav flex">
+        <!-- <a href="#" class="company-logo">
+            <img src="logo.jpeg">
+          </a> -->
+          <div class="com"><span class="span1">News</span><span class="span2">Magazine</span></div>
+        <div class="nav-links" id="nav-links"> 
+            <ul class="flex">
+                <li><a>Home</a></li>
+                
+               
+                <li><form action="/view11" method="post">
+                  <button type="submit">View Data</button>
+              </form></li>
+                
+                <li><form action="/index" method="post">
+                  <button class = button1 type="submit">Sign in</button>
+
+                  
+            </ul>
+        </div>
+    </div>
+</nav> 
+  <div class="bgi">
+  <div class="job">
+    <span class="stay">For Depth in News,</span>
+    <div class="typing-text">
+      <span> Just</span>
+      <span> Click and Cruise!</span>
+    </div>
+  </div>
+  <div class="fount1"><span>Enter the URL of the <span class="heading1">News article for deeply analysis</span></span></div>
+  
+  <div class="main1">
+    
+    <div class="front">
+
+    <!-- moving text -->
+    
+      <lable for="url">
+        <p>
+        <p>
+      </lable>
+      <form action="/" method="post">
+      <input type="text" id="url" name="enter_url" placeholder="Enter URL">
+      <button class=button type="submit" name="sub_url">Submit</button></form>
+    
+
+    <div>
+      <form action="/view" method="post">
+        <!-- <button class = button type="submit">View Data</button> -->
+      </form>
+      <!-- <form action="{{ url_for('login') }}" method="GET">
+        <button type="submit">Go to Login Page</button>
+      </form> -->
+    </div>
+  </div></div>
+  <div class="container">
+    {%if msg_count_word!=0%}
+    <div><h1>Title of the News article</h1>
+    <!-- <div class = box1>URL: {{msg_url}}</div> -->
+    <div class=box1>{{msg_title}}</div>
+    <h1>Genre</h1>
+    <div class=box1>{{msg_genre}}</div>
+    <h1>Sentiment</h1>
+    <div class=box1>{{msg_compound}}</div>
+    <h1>published Date & Time</h1>
+    <div class=box1>{{msg_results}}</div>
+    <h1>Summary of the News <article></article></h1>
+    <div class="scale">
+      <!-- <div class=bo>Summary</div> -->
+      <div class=time>Read time: {{msg_summ_time}} min</div>
+    </div>
+    <div class=box1>Summary: {{msg_summary}}</div>
+    <!-- <div class="scale1">
+      <div class="box2"><b>the number of words in it :</b>{{msg_count_word}}</div>
+      <div class="box2"><b>the number of sentences in it :</b>{{msg_count_sent}}</div>
+      <div class="box2"><b>the number of stop words in it :</b>{{msg_count_stp_word}}</div>
+      <div class="box2"><b>the POS tag count :</b>{{msg_dict1}}</div>
+    </div> -->
+    <h1>Article</h1>
+    <div class="scale">
+      <!-- <div class=bo>Main text of url text</div> -->
+      <div class=time>Read time: {{msg_time}} min</div>
+    </div>
+    <div class=box1>Article: {{msg_text}}</div>
+    <div class="scale1">
+      <div class="box2"><b>the number of words in it </b> <br> <br> {{msg_count_word}}</div>
+      <div class="box2"><b>the number of sentences in it </b> <br><br>{{msg_count_sent}}</div>
+      <div class="box2"><b>the number of stop words in it </b><br><br>{{msg_count_stp_word}}</div>
+      <div class="box2"><b>the POS tag count </b><br><br>{{msg_dict1}}</div>
+    </div>
+    <!-- <div class="main">
+      <div>
+        <h1>Sentiment</h1>
+      </div>
+      <div class="wrapper">
+        <div class="card">
+          <div class="circle">
+            <div class="bar"></div>
+            <div class="box"><span></span></div>
+          </div>
+          <div class="text">Positivity</div>
+        </div>
+        <div class="card js">
+          <div class="circle">
+            <div class="bar"></div>
+            <div class="box"><span></span></div>
+          </div>
+          <div class="text">Negativity</div>
+        </div>
+        <div class="card react">
+          <div class="circle">
+            <div class="bar"></div>
+            <div class="box"><span></span></div>
+          </div>
+          <div class="text">Neutral</div>
+        </div>
+      </div>
+    </div>
+    {%endif%}
+  </div></div> -->
+  <footer>
+    <!-- <div class="subclass"></div> -->
+  </footer>
+  <!-- <script>
+    let options = {
+      startAngle: -1.55,
+      size: 150,
+      value: {{msg_pos}},
+      fill: {gradient: ['#a445b2', '#fa4299']}
+    }
+    $(".circle .bar").circleProgress(options).on('circle-animation-progress',
+    function(event, progress, stepValue){
+      $(this).parent().find("span").text(String(stepValue.toFixed(2).substr(2)) + "%");
+    });
+    $(".js .bar").circleProgress({
+      value: {{msg_neg}}
+    });
+    $(".react .bar").circleProgress({
+      value: {{msg_neu}}
+    });
+  </script> -->
+</body>
+
+</html>
