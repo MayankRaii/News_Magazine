@@ -329,7 +329,8 @@ def portal():
 
                 cur.execute("insert into NEWS(url,text,estimated_time,title,genre,compound,publisher,count_word,count_sent,count_stp_word,upos) values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",(url,  text,estimated_time,title,genre, compound,publisher,count_word, count_sent,count_stp_word, json.dumps(dict1)))
                 conn.commit()
-                
+                return render_template("index.html",msg_time = estimated_time, msg_title = title, msg_url = url, msg_genre = genre, msg_summary = summary,msg_summ_time = estimated_summ_time, msg_text = text,msg_count_word = count_word,msg_count_sent = count_sent, msg_count_stp_word = count_stp_word,msg_dict1 = dict1,msg_compound=compound,msg_results= publisher)
+     
             else:
                 return abort(406)
         except:
