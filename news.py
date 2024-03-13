@@ -12,7 +12,10 @@ from heapq import nlargest
 import psycopg2
 import json
 import requests
-nltk.download("all")
+nltk.download("punkt")
+nltk.download("stopwords")
+nltk.download("vader_lexicon")
+
 
 app = Flask(__name__,static_folder='static')
 
