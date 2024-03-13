@@ -16,6 +16,8 @@ nltk.download("punkt")
 nltk.download("stopwords")
 nltk.download("vader_lexicon")
 nltk.download("universal_tagset")
+nltk.download('averaged_perceptron_tagger')
+
 
 app = Flask(__name__,static_folder='static')
 
