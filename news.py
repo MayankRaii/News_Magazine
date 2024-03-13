@@ -1,4 +1,3 @@
-r
 from flask import Flask, render_template, request, redirect, url_for,jsonify,abort
 import nltk
 # from urllib import requests
