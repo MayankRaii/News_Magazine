@@ -43,7 +43,7 @@
             <th class = "text12">ARTICLES</th>
             <th class = text>Read Time</th>
             <th class = text>Title</th>
-            <th class = text1>Genre</th>
+            <th class = text1>Gen10e</th>
             <th class = text1>Sentiment</th>
             <th class = text1>published Date & Time</th>
             <th class = text1>NO. OF WORDS</th>
@@ -54,6 +54,7 @@
         <tbody>
             {% for row in data_html %}
             <tr>
+                <td>{{ row[0] }}</td>
                 <td>{{ row[1] }}</td>
                 <td>{{ row[2] }}</td>
                 <td>{{ row[3] }}</td>
@@ -64,7 +65,6 @@
                 <td>{{ row[8] }}</td>
                 <td>{{ row[9] }}</td>
                 <td>{{ row[10] }}</td>
-                <td>{{ row[11] }}</td>
 
                 
             </tr>
