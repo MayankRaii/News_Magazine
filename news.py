@@ -1,6 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for,jsonify,abort
 import nltk
-nltk.download("all")
 # from urllib import requests
 
 from bs4 import BeautifulSoup
@@ -13,10 +12,9 @@ from heapq import nlargest
 import psycopg2
 import json
 import requests
+nltk.download("all")
 
-
-app = Flask(__name__)
-
+app = Flask(__name__,static_folder='static')
 
 
 def calculate_reading_time(text, words_per_minute=200):
@@ -128,6 +126,7 @@ def fun_genre(text):
     for key,value in dict_genre.items():
         if value == max_num:
             return key
+    
 def sentiment(text):
     sid = SentimentIntensityAnalyzer()
     sentences = nltk.sent_tokenize(text)
