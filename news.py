@@ -153,25 +153,23 @@ def sentiment(text):
 conn = psycopg2.connect(host = "dpg-cnmq90qcn0vc738fh5v0-a", database = "news_magazine", user = "news_magazine_user", password = "kcbYdr8UYXTE8jIdK9cw0Sh1KEiR56BS")
 cur = conn.cursor()
 
+create_table_query = """
 CREATE TABLE IF NOT EXISTS NEWS (
     url VARCHAR(255),
     text TEXT,
     estimated_time FLOAT,
     title VARCHAR(255),
     genre VARCHAR(50),
-    compound DOUBLE PRECISION, -- Change the type to DOUBLE PRECISION
+    compound DOUBLE PRECISION,
     publisher VARCHAR(100),
     count_word INTEGER,
     count_sent INTEGER,
     count_stp_word INTEGER,
     upos JSONB
-);
+)
+"""
 
-
-# Execute the SQL query
 cur.execute(create_table_query)
-
-# Commit the transaction
 conn.commit()
 
 
