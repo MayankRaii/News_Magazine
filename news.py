@@ -135,47 +135,38 @@ def fun_genre(text):
 def sentiment(text):
     sid = SentimentIntensityAnalyzer()
     sentences = nltk.sent_tokenize(text)
-    # Initialize variables to store cumulative sentiment scores
-    total_neg = 0
-    total_pos = 0
-    total_neu = 0
+    # Initialize variable to store cumulative compound sentiment score
     total_compound = 0
-    # Iterate through each sentence and calculate sentiment scores
+    # Iterate through each sentence and calculate compound sentiment score
     for sentence in sentences:
         # Calculate sentiment scores for the sentence
         scores = sid.polarity_scores(sentence)
         total_compound += scores['compound']
 
-    # Calculate the mean sentiment scores
+    # Calculate the mean compound sentiment score
     num_sentences = len(sentences)
     mean_compound = total_compound / num_sentences
 
-    if mean_compound > 0.5:
-        return "Positive"
-    elif -0.5< mean_compound <0.5:
-        return "Negative"
-    else:
-        return "Neutral" 
+    return mean_compound
 
 
 conn = psycopg2.connect(host = "dpg-cnmq90qcn0vc738fh5v0-a", database = "news_magazine", user = "news_magazine_user", password = "kcbYdr8UYXTE8jIdK9cw0Sh1KEiR56BS")
 cur = conn.cursor()
 
-create_table_query = """
 CREATE TABLE IF NOT EXISTS NEWS (
     url VARCHAR(255),
     text TEXT,
     estimated_time FLOAT,
     title VARCHAR(255),
     genre VARCHAR(50),
-    compound VARCHAR(100),
+    compound DOUBLE PRECISION, -- Change the type to DOUBLE PRECISION
     publisher VARCHAR(100),
     count_word INTEGER,
     count_sent INTEGER,
     count_stp_word INTEGER,
     upos JSONB
-)
-"""
+);
+
 
 # Execute the SQL query
 cur.execute(create_table_query)
