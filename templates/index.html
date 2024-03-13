@@ -53,40 +53,40 @@
     </div>
   </div></div>
   <div class="container">
-    {%if msg_count_word!=0%}
-    <div><h1>Title of the News article</h1></div>
-    <!-- <div class = box1>URL: {{msg_url}}</div> -->
-    <div class=box1>{{msg_title}}</div>
-    <h1>Genre</h1>
-    <div class=box1>{{msg_genre}}</div>
-    <h1>Sentiment</h1>
-    <div class=box1>{{msg_compound}}</div>
-    <h1>published Date & Time</h1>
-    <div class=box1>{{msg_results}}</div>
-    <h1>Summary of the News <article></article></h1>
-    <div class="scale">
-      <!-- <div class=bo>Summary</div> -->
-      <div class=time>Read time: {{msg_summ_time}} min</div>
-    </div>
-    <div class=box1>Summary: {{msg_summary}}</div>
-    <div class="scale1">
-      <div class="box2"><b>the number of words in it :</b>{{msg_count_word}}</div>
-      <div class="box2"><b>the number of sentences in it :</b>{{msg_count_sent}}</div>
-      <div class="box2"><b>the number of stop words in it :</b>{{msg_count_stp_word}}</div>
-      <div class="box2"><b>the POS tag count :</b>{{msg_dict1}}</div>
-    </div>
-    <h1>Article</h1>
-    <div class="scale">
-      <!-- <div class=bo>Main text of url text</div> -->
-      <div class=time>Read time: {{msg_time}} min</div>
-    </div>
-    <div class=box1>Article: {{msg_text}}</div>
-    <div class="scale1">
-      <div class="box2"><b>the number of words in it </b> <br> <br> {{msg_count_word}}</div>
-      <div class="box2"><b>the number of sentences in it </b> <br><br>{{msg_count_sent}}</div>
-      <div class="box2"><b>the number of stop words in it </b><br><br>{{msg_count_stp_word}}</div>
-      <div class="box2"><b>the POS tag count </b><br><br>{{msg_dict1}}</div>
-    </div>
-    {%endif%}
+    {% if msg_count_word!=0 %}
+      <div><h1>Title of the News article</h1></div>
+      <!-- <div class = box1>URL: {{msg_url}}</div> -->
+      <div class=box1>{{msg_title}}</div>
+      <h1>Genre</h1>
+      <div class=box1>{{msg_genre}}</div>
+      <h1>Sentiment</h1>
+      <div class=box1>{{msg_compound}}</div>
+      <h1>published Date & Time</h1>
+      <div class=box1>{{msg_results}}</div>
+      <h1>Summary of the News <article></article></h1>
+      <div class="scale">
+        <!-- <div class=bo>Summary</div> -->
+        <div class=time>Read time: {{msg_summ_time}} min</div>
+      </div>
+      <div class=box1>Summary: {{msg_summary}}</div>
+      <div class="scale1">
+        <div class="box2"><b>the number of words in it :</b>{{msg_count_word}}</div>
+        <div class="box2"><b>the number of sentences in it :</b>{{msg_count_sent}}</div>
+        <div class="box2"><b>the number of stop words in it :</b>{{msg_count_stp_word}}</div>
+        <div class="box2"><b>the POS tag count :</b>{{msg_dict1}}</div>
+      </div>
+      <h1>Article</h1>
+      <div class="scale">
+        <!-- <div class=bo>Main text of url text</div> -->
+        <div class=time>Read time: {{msg_time}} min</div>
+      </div>
+      <div class=box1>Article: {{msg_text}}</div>
+      <div class="scale1">
+        <div class="box2"><b>the number of words in it </b> <br> <br> {{msg_count_word}}</div>
+        <div class="box2"><b>the number of sentences in it </b> <br><br>{{msg_count_sent}}</div>
+        <div class="box2"><b>the number of stop words in it </b><br><br>{{msg_count_stp_word}}</div>
+        <div class="box2"><b>the POS tag count </b><br><br>{{msg_dict1}}</div>
+      </div>
+    {% endif %}
 </body>
 </html>
