@@ -64,7 +64,3 @@
    flask run
    ```
 
-<p align="center">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/6/60/Newspaper_noun_project_227.svg" alt="NewsMagzine Icon" width="120px"/>
-</p>
-
